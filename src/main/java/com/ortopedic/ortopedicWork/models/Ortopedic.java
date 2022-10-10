@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +12,7 @@ public class Ortopedic implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer ortopedic_id;
+    private Integer id;
     @Column(name = "name", nullable = false, length = 45)
     private String name;
     @Column(name = "brand", nullable = false, length = 45)
@@ -22,25 +21,39 @@ public class Ortopedic implements Serializable {
     @Column(name = "description", nullable = false, length = 250)
     private String description;
 
+    @OneToMany( mappedBy = "ortopedic")
+    @JsonIgnoreProperties("ortopedic")
+    private List<Category> categories;
+
     @ManyToOne
-    @JoinColumn(name = "idCategory")
-    @JsonIgnoreProperties("ortopedics")
-    private Category idCategory;
+    @JoinColumn(name = "category")
+    @JsonIgnoreProperties("ortopedicList")
+    private Category category;
 
-    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="idOrtopedics" )
-    @JsonIgnoreProperties("idOrtopedics")
-    private List<Message> messages;
+    @ManyToOne
+    @JoinColumn(name = "messages")
+    @JsonIgnoreProperties("ortopedic")
+    private Message messages;
 
-    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="idOrtopedic" )
-    @JsonIgnoreProperties("idOrtopedic")
-    private List<Reservations> reservations  ;
+    @ManyToOne
+    @JoinColumn(name = "reservations")
+    @JsonIgnoreProperties("ortopedicList")
+    private Reservations reservations;
 
-    public Integer getOrtopedic_id() {
-        return ortopedic_id;
+    @OneToMany( mappedBy = "ortopedicC")
+    @JsonIgnoreProperties("ortopedicC")
+    private List<Client> clients;
+
+    @OneToMany( mappedBy = "ortopedic")
+    @JsonIgnoreProperties("ortopedic")
+    private List<Reservations> reservation;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setOrtopedic_id(Integer ortopedic_id) {
-        this.ortopedic_id = ortopedic_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -75,11 +88,51 @@ public class Ortopedic implements Serializable {
         this.description = description;
     }
 
-    public Category getIdCategory() {
-        return idCategory;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setIdCategory(Category idCategory) {
-        this.idCategory = idCategory;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Message getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Message messages) {
+        this.messages = messages;
+    }
+
+    public Reservations getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Reservations reservations) {
+        this.reservations = reservations;
+    }
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
+    }
+
+    public List<Reservations> getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(List<Reservations> reservation) {
+        this.reservation = reservation;
     }
 }

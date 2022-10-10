@@ -22,10 +22,10 @@ public class ClientService {
     }
 
     public Client inserClient(Client client){
-        if (client.getClient_id() != null){
-            Optional<Client> clientTem = clientRepository.getClient(client.getClient_id());
+        if (client.getIdClient() != null){
+            Optional<Client> clientTem = clientRepository.getClient(client.getIdClient());
             if (clientTem.isEmpty()){
-                if (client.getClient_name() != null && client.getEmail() != null && client.getAge() != null && client.getPassword() != null){
+                if (client.getName() != null && client.getEmail() != null && client.getAge() != null && client.getPassword() != null){
                     return clientRepository.save(client);
                 }else {
                     return client;
@@ -39,11 +39,11 @@ public class ClientService {
     }
 
     public Client updateClient(Client client){
-        if (client.getClient_id() != null){
-            Optional<Client> clientTem = clientRepository.getClient(client.getClient_id());
+        if (client.getIdClient() != null){
+            Optional<Client> clientTem = clientRepository.getClient(client.getIdClient());
             if (!clientTem.isEmpty()){
-                if (client.getClient_name() != null){
-                    clientTem.get().setClient_name(client.getClient_name());
+                if (client.getName() != null){
+                    clientTem.get().setName(client.getName());
                 }
                 if (client.getEmail() != null){
                     clientTem.get().setEmail(client.getEmail());

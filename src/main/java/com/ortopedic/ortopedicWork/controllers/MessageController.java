@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Message")
+@RequestMapping("api/Message")
 public class MessageController {
 
 

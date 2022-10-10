@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Score")
+@RequestMapping("api/Score")
 public class ScoreController {
 
     @Autowired

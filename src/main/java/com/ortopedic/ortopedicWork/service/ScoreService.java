@@ -22,10 +22,10 @@ public class ScoreService {
     }
 
     public Score insertScore(Score score){
-        if (score.getScore_id() != null){
-            Optional<Score> scoreTem = scoreRepository.getScore(score.getScore_id());
+        if (score.getId() != null){
+            Optional<Score> scoreTem = scoreRepository.getScore(score.getId());
             if (scoreTem.isEmpty()){
-                if (score.getScore() != null && score.getMessage() != null){
+                if (score.getScore() != null ){
                     return scoreRepository.save(score);
                 }else {
                     return score;
@@ -39,15 +39,13 @@ public class ScoreService {
     }
 
     public Score updateScore(Score score){
-        if (score.getScore_id() != null){
-            Optional<Score> scoreTem = scoreRepository.getScore(score.getScore_id());
+        if (score.getId() != null){
+            Optional<Score> scoreTem = scoreRepository.getScore(score.getId());
             if (!scoreTem.isEmpty()){
                 if (score.getScore() != null){
                     scoreTem.get().setScore(score.getScore());
                 }
-                if (score.getMessage() != null){
-                    scoreTem.get().setMessage(score.getMessage());
-                }
+
                 return scoreRepository.save(scoreTem.get());
             }else {
                 return score;

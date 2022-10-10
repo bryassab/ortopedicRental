@@ -14,44 +14,60 @@ public class Reservations implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer reservation_id;
-    private Date start_date;
-    private Date devolution_date;
-    private String status="creado";
+    private Integer idReservation;
+    private Date startDate;
+    private Date devolutionDate;
+    private String status="created";
+
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "reservations")
+    @JsonIgnoreProperties("reservations")
+    private List<Ortopedic> ortopedicList;
+
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "reservation")
+    @JsonIgnoreProperties("reservation")
+    private List<Client> clients;
 
     @ManyToOne
-    @JoinColumn(name = "idOrtopedic")
+    @JoinColumn(name = "client")
     @JsonIgnoreProperties("reservations")
-    private Ortopedic idOrtopedic;
+    private Client client;
 
     @ManyToOne
-    @JoinColumn(name = "idClient")
+    @JoinColumn(name = "ortopedic")
+    @JsonIgnoreProperties("reservation")
+    private Ortopedic ortopedic;
+
+    @OneToOne(cascade = {CascadeType.PERSIST}, mappedBy = "reservations")
     @JsonIgnoreProperties("reservations")
-    private Client idClient;
+    private Score scores;
 
     @OneToOne
-    @JoinColumn(name = "idScore")
-    @JsonIgnoreProperties("reservations")
-    private Score idScore;
+    @JoinColumn(name = "score")
+    @JsonIgnoreProperties("reservation")
+    private Score score;
 
-
-
- 
-
-    public Date getStart_date() {
-        return start_date;
+    public Integer getIdReservation() {
+        return idReservation;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setIdReservation(Integer idReservation) {
+        this.idReservation = idReservation;
     }
 
-    public Date getDevolution_date() {
-        return devolution_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDevolution_date(Date devolution_date) {
-        this.devolution_date = devolution_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getDevolutionDate() {
+        return devolutionDate;
+    }
+
+    public void setDevolutionDate(Date devolutionDate) {
+        this.devolutionDate = devolutionDate;
     }
 
     public String getStatus() {
@@ -62,26 +78,51 @@ public class Reservations implements Serializable{
         this.status = status;
     }
 
-    public Ortopedic getIdOrtopedic() {
-        return idOrtopedic;
+    public List<Ortopedic> getOrtopedicList() {
+        return ortopedicList;
     }
 
-    public void setIdOrtopedic(Ortopedic idOrtopedic) {
-        this.idOrtopedic = idOrtopedic;
+    public void setOrtopedicList(List<Ortopedic> ortopedicList) {
+        this.ortopedicList = ortopedicList;
     }
 
-    public Client getIdClient() {
-        return idClient;
+    public List<Client> getClients() {
+        return clients;
     }
 
-    public void setIdClient(Client idClient) {
-        this.idClient = idClient;
-    }
-    public Score getIdScore() {
-        return idScore;
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
     }
 
-    public void setIdScore(Score idScore) {
-        this.idScore = idScore;
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Ortopedic getOrtopedic() {
+        return ortopedic;
+    }
+
+    public void setOrtopedic(Ortopedic ortopedic) {
+        this.ortopedic = ortopedic;
+    }
+
+    public Score getScores() {
+        return scores;
+    }
+
+    public void setScores(Score scores) {
+        this.scores = scores;
+    }
+
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
     }
 }

@@ -12,37 +12,52 @@ import javax.persistence.*;
 public class Client implements Serializable {
 
     @Id
-    private Integer client_id;
-    @Column(name = "client_name", nullable = false, length = 250)
-    private String client_name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idClient;
+    @Column(name = "name", nullable = false, length = 250)
+    private String  name;
     @Column(name = "email", nullable = false, length = 45)
     private String email;
     private Integer age;
     @Column(name = "password", nullable = false, length = 45)
     private String password;
 
-    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="idClients" )
-    @JsonIgnoreProperties("idClients")
+    @ManyToOne
+    @JoinColumn(name = "messages")
+    @JsonIgnoreProperties("client")
+    private Message message;
+
+    @ManyToOne
+    @JoinColumn(name = "reservations")
+    @JsonIgnoreProperties("clients")
+    private Reservations reservation;
+
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "clients")
+    @JsonIgnoreProperties("message")
     private List<Message> messages;
 
-    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="idClient" )
-    @JsonIgnoreProperties("idClient")
+    @ManyToOne
+    @JoinColumn(name = "ortopedic")
+    @JsonIgnoreProperties("clients")
+    private Ortopedic ortopedicC;
+
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
+    @JsonIgnoreProperties("client")
     private List<Reservations> reservations;
-
-    public Integer getClient_id() {
-        return client_id;
+    public Integer getIdClient() {
+        return idClient;
     }
 
-    public void setClient_id(Integer client_id) {
-        this.client_id = client_id;
+    public void setIdClient(Integer idClient) {
+        this.idClient = idClient;
     }
 
-    public String getClient_name() {
-        return client_name;
+    public String getName() {
+        return name;
     }
 
-    public void setClient_name(String client_name) {
-        this.client_name = client_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -67,5 +82,45 @@ public class Client implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }
+
+    public Reservations getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservations reservation) {
+        this.reservation = reservation;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public Ortopedic getOrtopedicC() {
+        return ortopedicC;
+    }
+
+    public void setOrtopedicC(Ortopedic ortopedicC) {
+        this.ortopedicC = ortopedicC;
+    }
+
+    public List<Reservations> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservations> reservations) {
+        this.reservations = reservations;
     }
 }

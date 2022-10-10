@@ -22,8 +22,8 @@ public class AdminService {
     }
 
     public Admin insertAdmin(Admin admin){
-        if(admin.getAdmin_id() != null){
-            Optional<Admin> adminTem = adminRepository.getAdmin(admin.getAdmin_id());
+        if(admin.getId() != null){
+            Optional<Admin> adminTem = adminRepository.getAdmin(admin.getId());
             if (adminTem.isEmpty()){
                 if (admin.getName() != null && admin.getCorreo() != null && admin.getPassword() != null){
                     return adminRepository.save(admin);
@@ -39,8 +39,8 @@ public class AdminService {
     }
 
     public Admin updateAdmin(Admin admin){
-        if (admin.getAdmin_id() != null){
-            Optional<Admin> adminTem = adminRepository.getAdmin(admin.getAdmin_id());
+        if (admin.getId() != null){
+            Optional<Admin> adminTem = adminRepository.getAdmin(admin.getId());
             if (!adminTem.isEmpty()){
                 if (admin.getName() != null ){
                     adminTem.get().setName(admin.getName());

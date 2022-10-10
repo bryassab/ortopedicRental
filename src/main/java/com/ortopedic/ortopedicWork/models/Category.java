@@ -1,43 +1,47 @@
 package com.ortopedic.ortopedicWork.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="category")
 public class Category implements Serializable {
 
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
-    @Column(name = "categoryName", nullable = false, length = 45)
-    private String categoryName;
+    @Column(name = "name", nullable = false, length = 45)
+    private String name;
     @Column(name = "description", nullable = false, length = 250)
     private String description;
 
-    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "idCategory")
-    @JsonIgnoreProperties("idCategory")
-    private List<Ortopedic> ortopedics;
+    @ManyToOne
+    @JoinColumn(name = "ortopedic")
+    @JsonIgnoreProperties("categories")
+    private Ortopedic ortopedic;
+
+    @OneToMany( mappedBy = "category")
+    @JsonIgnoreProperties("category")
+    private List<Ortopedic> ortopedicList;
+
 
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+
+    public String getName() {
+        return name;
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -47,4 +51,14 @@ public class Category implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Ortopedic getOrtopedic() {
+        return ortopedic;
+    }
+
+    public void setOrtopedic(Ortopedic ortopedic) {
+        this.ortopedic = ortopedic;
+    }
+
+
 }

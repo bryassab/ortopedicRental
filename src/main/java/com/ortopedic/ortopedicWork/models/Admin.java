@@ -2,26 +2,24 @@ package com.ortopedic.ortopedicWork.models;
 
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="admin")
 public class Admin implements Serializable{
     @Id
-    private Integer admin_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String correo;
     private String password;
 
-    public Integer getAdmin_id() {
-        return admin_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAdmin_id(Integer admin_id) {
-        this.admin_id = admin_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

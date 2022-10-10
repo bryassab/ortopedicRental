@@ -22,10 +22,10 @@ public class ReservationsService {
     }
 
     public Reservations insertReservation(Reservations reservations){
-        if (reservations.getReservation_id() != null){
-            Optional<Reservations> reservationTem = reservationsRepository.getReservation(reservations.getReservation_id());
+        if (reservations.getIdReservation() != null){
+            Optional<Reservations> reservationTem = reservationsRepository.getReservation(reservations.getIdReservation());
             if(reservationTem.isEmpty()){
-                if (reservations.getStart_date() != null && reservations.getDevolution_date() != null && reservations.getStatus() != null){
+                if (reservations.getStartDate() != null && reservations.getDevolutionDate() != null && reservations.getStatus() != null){
                     return reservationsRepository.save(reservations);
                 }else {
                     return reservations;
@@ -39,14 +39,14 @@ public class ReservationsService {
     }
 
     public Reservations updateReservation(Reservations reservations){
-        if (reservations.getReservation_id() != null){
-            Optional<Reservations> reservationTem = reservationsRepository.getReservation(reservations.getReservation_id());
+        if (reservations.getIdReservation() != null){
+            Optional<Reservations> reservationTem = reservationsRepository.getReservation(reservations.getIdReservation());
             if (!reservationTem.isEmpty()){
-                if (reservations.getStart_date() != null){
-                    reservationTem.get().setStart_date(reservations.getStart_date());
+                if (reservations.getStartDate() != null){
+                    reservationTem.get().setStartDate(reservations.getStartDate());
                 }
-                if (reservations.getDevolution_date() != null){
-                    reservationTem.get().setDevolution_date(reservations.getDevolution_date());
+                if (reservations.getDevolutionDate() != null){
+                    reservationTem.get().setDevolutionDate(reservations.getDevolutionDate());
                 }
                 if (reservations.getStatus() != null){
                     reservationTem.get().setStatus(reservations.getStatus());

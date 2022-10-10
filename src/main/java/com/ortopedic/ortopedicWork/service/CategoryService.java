@@ -25,7 +25,7 @@ public class CategoryService {
         if(category.getId() != null){
             Optional<Category> categoryTem = categoryRepository.getCategory(category.getId());
             if (categoryTem.isEmpty()){
-                if (category.getCategoryName() != null && category.getDescription() != null){
+                if (category.getName() != null && category.getDescription() != null){
                     return categoryRepository.save(category);
                 }else {
                     return category;
@@ -42,13 +42,14 @@ public class CategoryService {
         if (category.getId() != null){
             Optional<Category> categoryTem = categoryRepository.getCategory(category.getId());
             if (!categoryTem.isEmpty()){
-                if (category.getCategoryName() != null ){
-                    categoryTem.get().setCategoryName(category.getCategoryName());
+                if (category.getName() != null ){
+                    categoryTem.get().setName(category.getName());
                 }
                 if (category.getDescription() != null){
                     categoryTem.get().setDescription(category.getDescription());
                 }
-                return categoryRepository.save(categoryTem.get());
+                 categoryRepository.save(categoryTem.get());
+                return categoryTem.get();
             }else {
                 return category;
             }
