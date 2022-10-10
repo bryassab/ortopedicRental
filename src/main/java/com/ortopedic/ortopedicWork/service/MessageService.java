@@ -22,20 +22,7 @@ public class MessageService {
     }
 
     public Message insertMessage(Message message){
-        if (message.getIdMessage() != null){
-            Optional<Message> messageTem = messageRepository.getMessage(message.getIdMessage());
-            if (messageTem.isEmpty()){
-                if (message.getMessageText() != null){
-                    return messageRepository.save(message);
-                }else {
-                    return message;
-                }
-            }else {
-                return message;
-            }
-        }else {
-            return message;
-        }
+       return messageRepository.save(message);
     }
 
     public Message updateMessage(Message message){

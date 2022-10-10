@@ -22,20 +22,7 @@ public class ReservationsService {
     }
 
     public Reservations insertReservation(Reservations reservations){
-        if (reservations.getIdReservation() != null){
-            Optional<Reservations> reservationTem = reservationsRepository.getReservation(reservations.getIdReservation());
-            if(reservationTem.isEmpty()){
-                if (reservations.getStartDate() != null && reservations.getDevolutionDate() != null && reservations.getStatus() != null){
-                    return reservationsRepository.save(reservations);
-                }else {
-                    return reservations;
-                }
-            }else {
-                return reservations;
-            }
-        }else {
-            return reservations;
-        }
+        return reservationsRepository.save(reservations);
     }
 
     public Reservations updateReservation(Reservations reservations){

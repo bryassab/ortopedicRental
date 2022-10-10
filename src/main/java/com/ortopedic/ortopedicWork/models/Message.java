@@ -51,21 +51,6 @@ public class Message implements Serializable {
         this.messageText = messageText;
     }
 
-    public List<Ortopedic> getOrtopedic() {
-        return ortopedic;
-    }
-
-    public void setOrtopedic(List<Ortopedic> ortopedic) {
-        this.ortopedic = ortopedic;
-    }
-
-    public List<Client> getClient() {
-        return client;
-    }
-
-    public void setClient(List<Client> client) {
-        this.client = client;
-    }
 
     public Client getClients() {
         return clients;

@@ -22,20 +22,7 @@ public class ScoreService {
     }
 
     public Score insertScore(Score score){
-        if (score.getId() != null){
-            Optional<Score> scoreTem = scoreRepository.getScore(score.getId());
-            if (scoreTem.isEmpty()){
-                if (score.getScore() != null ){
-                    return scoreRepository.save(score);
-                }else {
-                    return score;
-                }
-            }else {
-                return score;
-            }
-        }else {
-            return score;
-        }
+        return scoreRepository.save(score);
     }
 
     public Score updateScore(Score score){

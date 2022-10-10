@@ -22,20 +22,7 @@ public class CategoryService {
     }
 
     public Category insertCategory(Category category){
-        if(category.getId() != null){
-            Optional<Category> categoryTem = categoryRepository.getCategory(category.getId());
-            if (categoryTem.isEmpty()){
-                if (category.getName() != null && category.getDescription() != null){
-                    return categoryRepository.save(category);
-                }else {
-                    return category;
-                }
-            }else {
-                return category;
-            }
-        }else {
-            return category;
-        }
+       return categoryRepository.save(category);
     }
 
     public Category updateCategory(Category category){

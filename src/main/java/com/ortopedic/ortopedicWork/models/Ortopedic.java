@@ -21,6 +21,8 @@ public class Ortopedic implements Serializable {
     @Column(name = "description", nullable = false, length = 250)
     private String description;
 
+
+
     @OneToMany( mappedBy = "ortopedic")
     @JsonIgnoreProperties("ortopedic")
     private List<Category> categories;
@@ -88,13 +90,6 @@ public class Ortopedic implements Serializable {
         this.description = description;
     }
 
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
 
     public Category getCategory() {
         return category;
@@ -118,21 +113,6 @@ public class Ortopedic implements Serializable {
 
     public void setReservations(Reservations reservations) {
         this.reservations = reservations;
-    }
 
-    public List<Client> getClients() {
-        return clients;
-    }
-
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
-    }
-
-    public List<Reservations> getReservation() {
-        return reservation;
-    }
-
-    public void setReservation(List<Reservations> reservation) {
-        this.reservation = reservation;
     }
 }

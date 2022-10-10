@@ -86,13 +86,6 @@ public class Reservations implements Serializable{
         this.ortopedicList = ortopedicList;
     }
 
-    public List<Client> getClients() {
-        return clients;
-    }
-
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
-    }
 
     public Client getClient() {
         return client;

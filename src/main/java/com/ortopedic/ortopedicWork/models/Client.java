@@ -100,13 +100,6 @@ public class Client implements Serializable {
         this.reservation = reservation;
     }
 
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
 
     public Ortopedic getOrtopedicC() {
         return ortopedicC;
@@ -116,11 +109,4 @@ public class Client implements Serializable {
         this.ortopedicC = ortopedicC;
     }
 
-    public List<Reservations> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservations> reservations) {
-        this.reservations = reservations;
-    }
 }
