@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name="category")
 public class Category implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "name", nullable = false, length = 45)
@@ -17,21 +17,18 @@ public class Category implements Serializable {
     @Column(name = "description", nullable = false, length = 250)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "ortopedic")
-    @JsonIgnoreProperties("categories")
-    private Ortopedic ortopedic;
-
     @OneToMany( mappedBy = "category")
     @JsonIgnoreProperties("category")
-    private List<Ortopedic> ortopedicList;
-
+    private List<Ortopedic> ortopedics;
 
 
     public Integer getId() {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -49,13 +46,11 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-    public Ortopedic getOrtopedic() {
-        return ortopedic;
+    public List<Ortopedic> getOrtopedics() {
+        return ortopedics;
     }
 
-    public void setOrtopedic(Ortopedic ortopedic) {
-        this.ortopedic = ortopedic;
+    public void setOrtopedics(List<Ortopedic> ortopedics) {
+        this.ortopedics = ortopedics;
     }
-
-
 }

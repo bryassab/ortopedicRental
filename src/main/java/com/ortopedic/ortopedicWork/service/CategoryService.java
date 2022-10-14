@@ -35,6 +35,9 @@ public class CategoryService {
                 if (category.getDescription() != null){
                     categoryTem.get().setDescription(category.getDescription());
                 }
+                if (category.getOrtopedics() != null){
+                    categoryTem.get().setOrtopedics(category.getOrtopedics());
+                }
                  categoryRepository.save(categoryTem.get());
                 return categoryTem.get();
             }else {

@@ -41,6 +41,13 @@ public class ClientService {
                 if (client.getPassword() != null){
                     clientTem.get().setPassword(client.getPassword());
                 }
+                if (client.getMessages() != null){
+                    clientTem.get().setMessages(client.getMessages());
+                }
+                if (client.getReservations() != null){
+                    clientTem.get().setReservations(client.getReservations());
+                }
+
                 return clientRepository.save(clientTem.get());
             }else {
                 return client;

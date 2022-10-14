@@ -32,6 +32,12 @@ public class MessageService {
                 if (message.getMessageText() != null){
                     messageTem.get().setMessageText(message.getMessageText());
                 }
+                if (message.getOrtopedic() != null){
+                    messageTem.get().setOrtopedic(message.getOrtopedic());
+                }
+                if (message.getClient() != null){
+                    messageTem.get().setClient(message.getClient());
+                }
                 return messageRepository.save(messageTem.get());
             }else {
                 return message;

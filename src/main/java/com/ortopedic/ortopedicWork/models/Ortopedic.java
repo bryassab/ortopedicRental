@@ -21,34 +21,19 @@ public class Ortopedic implements Serializable {
     @Column(name = "description", nullable = false, length = 250)
     private String description;
 
-
-
-    @OneToMany( mappedBy = "ortopedic")
-    @JsonIgnoreProperties("ortopedic")
-    private List<Category> categories;
-
     @ManyToOne
     @JoinColumn(name = "category")
-    @JsonIgnoreProperties("ortopedicList")
+    @JsonIgnoreProperties(value = {"ortopedics"}, allowSetters = true)
     private Category category;
 
-    @ManyToOne
-    @JoinColumn(name = "messages")
-    @JsonIgnoreProperties("ortopedic")
-    private Message messages;
+    @OneToMany(mappedBy = "ortopedic")
+    @JsonIgnoreProperties({"ortopedic","client"})
+    private List<Message> messages;
+    @OneToMany(mappedBy = "ortopedic")
+    @JsonIgnoreProperties({"ortopedic","client"})
+    private List<Reservations> reservations;
 
-    @ManyToOne
-    @JoinColumn(name = "reservations")
-    @JsonIgnoreProperties("ortopedicList")
-    private Reservations reservations;
 
-    @OneToMany( mappedBy = "ortopedicC")
-    @JsonIgnoreProperties("ortopedicC")
-    private List<Client> clients;
-
-    @OneToMany( mappedBy = "ortopedic")
-    @JsonIgnoreProperties("ortopedic")
-    private List<Reservations> reservation;
 
     public Integer getId() {
         return id;
@@ -90,7 +75,6 @@ public class Ortopedic implements Serializable {
         this.description = description;
     }
 
-
     public Category getCategory() {
         return category;
     }
@@ -99,20 +83,19 @@ public class Ortopedic implements Serializable {
         this.category = category;
     }
 
-    public Message getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Message messages) {
-        this.messages = messages;
-    }
-
-    public Reservations getReservations() {
+    public List<Reservations> getReservations() {
         return reservations;
     }
 
-    public void setReservations(Reservations reservations) {
+    public void setReservations(List<Reservations> reservations) {
         this.reservations = reservations;
+    }
 
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 }

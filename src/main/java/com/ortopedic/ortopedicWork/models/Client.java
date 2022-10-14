@@ -14,50 +14,30 @@ public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idClient;
-    @Column(name = "name", nullable = false, length = 250)
-    private String  name;
     @Column(name = "email", nullable = false, length = 45)
     private String email;
-    private Integer age;
     @Column(name = "password", nullable = false, length = 45)
     private String password;
+    @Column(name = "name", nullable = false, length = 250)
+    private String  name;
 
-    @ManyToOne
-    @JoinColumn(name = "messages")
+    private Integer age;
+
+    @OneToMany(mappedBy = "client")
     @JsonIgnoreProperties("client")
-    private Message message;
-
-    @ManyToOne
-    @JoinColumn(name = "reservations")
-    @JsonIgnoreProperties("clients")
-    private Reservations reservation;
-
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "clients")
-    @JsonIgnoreProperties("message")
     private List<Message> messages;
-
-    @ManyToOne
-    @JoinColumn(name = "ortopedic")
-    @JsonIgnoreProperties("clients")
-    private Ortopedic ortopedicC;
-
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
+    @OneToMany(mappedBy = "client")
     @JsonIgnoreProperties("client")
     private List<Reservations> reservations;
+
+
+
+
     public Integer getIdClient() {
         return idClient;
     }
-
     public void setIdClient(Integer idClient) {
         this.idClient = idClient;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {
@@ -68,14 +48,6 @@ public class Client implements Serializable {
         this.email = email;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -84,29 +56,37 @@ public class Client implements Serializable {
         this.password = password;
     }
 
-    public Message getMessage() {
-        return message;
+    public String getName() {
+        return name;
     }
 
-    public void setMessage(Message message) {
-        this.message = message;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Reservations getReservation() {
-        return reservation;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setReservation(Reservations reservation) {
-        this.reservation = reservation;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
 
-    public Ortopedic getOrtopedicC() {
-        return ortopedicC;
+
+    public List<Reservations> getReservations() {
+        return reservations;
     }
 
-    public void setOrtopedicC(Ortopedic ortopedicC) {
-        this.ortopedicC = ortopedicC;
+    public void setReservations(List<Reservations> reservations) {
+        this.reservations = reservations;
     }
 
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 }

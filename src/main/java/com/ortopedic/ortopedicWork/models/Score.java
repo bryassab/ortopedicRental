@@ -18,13 +18,7 @@ public class Score implements Serializable{
 
     @OneToOne
     @JoinColumn(name = "reservations")
-    @JsonIgnoreProperties("scores")
     private Reservations reservations;
-
-    @OneToOne(cascade = {CascadeType.PERSIST}, mappedBy = "score")
-    @JsonIgnoreProperties("score")
-    private Reservations reservation;
-
 
     public Integer getId() {
         return id;
@@ -42,19 +36,12 @@ public class Score implements Serializable{
         this.score = score;
     }
 
+
     public Reservations getReservations() {
         return reservations;
     }
 
     public void setReservations(Reservations reservations) {
         this.reservations = reservations;
-    }
-
-    public Reservations getReservation() {
-        return reservation;
-    }
-
-    public void setReservation(Reservations reservation) {
-        this.reservation = reservation;
     }
 }

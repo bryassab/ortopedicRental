@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -18,20 +17,15 @@ public class Message implements Serializable {
     @Column(name = "messageText", nullable = false, length = 450)
     private String messageText;
 
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "messages")
-    @JsonIgnoreProperties("messages")
-    private List<Ortopedic> ortopedic;
-
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "message")
-    @JsonIgnoreProperties("message")
-    private List<Client> client;
+    @ManyToOne
+    @JoinColumn(name = "ortopedic")
+    @JsonIgnoreProperties({"messages", "reservations"})
+    private Ortopedic ortopedic;
 
     @ManyToOne
     @JoinColumn(name = "client")
-    @JsonIgnoreProperties("messages")
-    private Client clients;
-
-
+    @JsonIgnoreProperties({"messages", "reservations"})
+    private Client client;
 
 
 
@@ -51,12 +45,19 @@ public class Message implements Serializable {
         this.messageText = messageText;
     }
 
-
-    public Client getClients() {
-        return clients;
+    public Ortopedic getOrtopedic() {
+        return ortopedic;
     }
 
-    public void setClients(Client clients) {
-        this.clients = clients;
+    public void setOrtopedic(Ortopedic ortopedic) {
+        this.ortopedic = ortopedic;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

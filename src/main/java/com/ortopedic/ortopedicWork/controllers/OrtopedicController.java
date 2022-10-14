@@ -34,10 +34,10 @@ public class OrtopedicController {
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Ortopedic updateOrtopedic(@RequestBody Ortopedic ortopedic){
-        return ortopedicService.insertOrtopedic(ortopedic);
+        return ortopedicService.updateOrtopedic(ortopedic);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Boolean deleteOrtopedic(@PathVariable("id") int ortopedic_id){
         return ortopedicService.deleteOrtopedic(ortopedic_id);

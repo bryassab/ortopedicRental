@@ -25,7 +25,7 @@ public class OrtopedicService {
         return ortopedicRepository.save(ortopedic);
     }
 
-    public Ortopedic upstaeOrtopedic(Ortopedic ortopedic){
+    public Ortopedic updateOrtopedic(Ortopedic ortopedic){
         if (ortopedic.getId() != null){
             Optional<Ortopedic> ortopedicTem = ortopedicRepository.getOrtopedic(ortopedic.getId());
             if (!ortopedicTem.isEmpty()){
@@ -40,6 +40,15 @@ public class OrtopedicService {
                 }
                 if (ortopedic.getDescription() != null){
                     ortopedicTem.get().setDescription(ortopedic.getDescription());
+                }
+                if (ortopedic.getCategory() != null){
+                    ortopedicTem.get().setCategory(ortopedic.getCategory());
+                }
+                if (ortopedic.getMessages() != null){
+                    ortopedicTem.get().setMessages(ortopedic.getMessages());
+                }
+                if (ortopedic.getReservations() != null){
+                    ortopedicTem.get().setReservations(ortopedic.getReservations());
                 }
                 return ortopedicRepository.save(ortopedicTem.get());
             }else {

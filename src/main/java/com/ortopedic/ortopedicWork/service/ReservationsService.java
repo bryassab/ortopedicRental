@@ -38,6 +38,15 @@ public class ReservationsService {
                 if (reservations.getStatus() != null){
                     reservationTem.get().setStatus(reservations.getStatus());
                 }
+                if (reservations.getClient() != null){
+                    reservationTem.get().setClient(reservations.getClient());
+                }
+                if (reservations.getOrtopedic() != null){
+                    reservationTem.get().setOrtopedic(reservations.getOrtopedic());
+                }
+                if (reservations.getScore() != null){
+                    reservationTem.get().setScore(reservations.getScore());
+                }
                 return  reservationsRepository.save(reservationTem.get());
             }else {
                 return reservations;

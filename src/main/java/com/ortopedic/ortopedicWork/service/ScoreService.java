@@ -32,7 +32,9 @@ public class ScoreService {
                 if (score.getScore() != null){
                     scoreTem.get().setScore(score.getScore());
                 }
-
+                if (score.getReservations() != null){
+                    scoreTem.get().setReservations(score.getReservations());
+                }
                 return scoreRepository.save(scoreTem.get());
             }else {
                 return score;
