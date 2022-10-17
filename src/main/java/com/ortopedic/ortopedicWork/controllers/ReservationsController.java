@@ -1,5 +1,7 @@
 package com.ortopedic.ortopedicWork.controllers;
 
+import com.ortopedic.ortopedicWork.models.ReportClient;
+import com.ortopedic.ortopedicWork.models.ReportStatus;
 import com.ortopedic.ortopedicWork.models.Reservations;
 import com.ortopedic.ortopedicWork.service.ReservationsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/Reservation")
+@CrossOrigin(origins = "*")
 public class ReservationsController {
 
     @Autowired
@@ -41,5 +44,20 @@ public class ReservationsController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Boolean deleteReservation(@PathVariable("id") int reservation_id){
         return reservationsService.deleteReservation(reservation_id);
+    }
+
+    @GetMapping("/report-dates/{dateStart}/{dateEnd}")
+    public List<Reservations> getallByDates(@PathVariable("dateStart") String dateStart,@PathVariable("dateEnd") String dateEnd){
+        return reservationsService.allByDates(dateStart, dateEnd);
+    }
+
+    @GetMapping("/report-clients")
+    public List<ReportClient> getReservationClient(){
+        return reservationsService.getReservationClient();
+    }
+
+    @GetMapping("/report-status")
+    public ReportStatus getByStatus(){
+        return reservationsService.getReportStatus();
     }
 }

@@ -1,9 +1,16 @@
 package com.ortopedic.ortopedicWork.service;
 
+import com.ortopedic.ortopedicWork.models.ReportClient;
+import com.ortopedic.ortopedicWork.models.ReportStatus;
 import com.ortopedic.ortopedicWork.models.Reservations;
 import com.ortopedic.ortopedicWork.repositories.ReservationsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,5 +69,34 @@ public class ReservationsService {
             return true;
         }).orElse(false);
         return success;
+    }
+
+    public List<Reservations> getByStatus(String status){
+        return reservationsRepository.getByStatus(status);
+    }
+
+    public List<ReportClient> getReservationClient(){
+        return reservationsRepository.getReservationClient();
+    }
+
+    public ReportStatus getReportStatus(){
+        return reservationsRepository.getReportStatus();
+    }
+
+    public List<Reservations> allByDates(String dateStart, String dateEnd){
+        SimpleDateFormat convertDate = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = new Date();
+        Date devolutionDate = new Date();
+        try{
+            startDate = convertDate.parse(dateStart);
+            devolutionDate = convertDate.parse(dateEnd);
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        if (startDate.before(devolutionDate)){
+            return reservationsRepository.getAllByDates(startDate,devolutionDate);
+        }else {
+            return new ArrayList<>();
+        }
     }
 }
